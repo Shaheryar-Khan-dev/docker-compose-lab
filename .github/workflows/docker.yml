@@ -11,6 +11,11 @@ on:
 jobs:
   validate:
     runs-on: ubuntu-latest
+env:
+      MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
+      MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
+      MYSQL_USER: ${{ secrets.MYSQL_USER }}
+      MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
 
     steps:
       - name: Checkout repository
@@ -18,3 +23,12 @@ jobs:
 
       - name: Validate Docker Compose
         run: docker compose config
+
+      - name: Start Docker Compose
+        run: docker compose up -d
+
+      - name: Check containers
+        run: docker compose ps
+
+      - name: Stop Docker Compose
+        run: docker compose down
