@@ -16,6 +16,7 @@ services:
       retries: 10
 
   website:
+    build: .
     image: my-website
     container_name: compose-website
     ports:
